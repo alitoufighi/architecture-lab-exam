@@ -17,6 +17,7 @@ module ID_Stage(
     output MEM_R_EN,
     output MEM_W_EN,
     output WB_EN,
+    output freeze,
     output single_src
 );
     wire is_imm;
@@ -27,9 +28,14 @@ module ID_Stage(
     wire _MEM_R_EN, _MEM_W_EN, _WB_EN, _is_imm, _single_src;
     wire [1:0] _Br_type;
 
+    wire [1:0] swp_sel;
+    wire [4:0] _Dest;
+
     Control_unit cu(
             .opcode(Instruction[31:26]),
-
+            .clk(clk),
+            .freeze(swp_freeze),
+            .swp_sel(swp_sel),
             .exec_cmd(_EXE_CMD),
             .mem_r_en(_MEM_R_EN),
             .mem_w_en(_MEM_W_EN),
@@ -62,5 +68,6 @@ module ID_Stage(
     assign Val2 = is_imm ? sign_extended : RegF2;
     assign Val1 = RegF1;
     assign Reg2 = RegF2;
-    assign Dest = is_imm ? Instruction[20:16] : Instruction[15:11];
+    assign _Dest = is_imm ? Instruction[20:16] : Instruction[15:11];
+    assign Dest = (swp_sel==0) ? _Dest : (swp_sel == 1) ? src1 : src2;
 endmodule

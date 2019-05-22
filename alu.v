@@ -14,5 +14,7 @@ module ALU(
                     (cmd==4'b1000) ? in1 << in2 :
                     (cmd==4'b1001) ? $signed($signed(in1) >>> in2) :
                     (cmd==4'b1010) ? in1 >> in2 :
+                    (cmd==4'b1100) ? in1 :
+                    (cmd==4'b1101) ? in2 :
                     32'b0;
 endmodule

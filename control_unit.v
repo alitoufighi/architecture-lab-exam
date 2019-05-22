@@ -1,5 +1,9 @@
 module Control_unit(
         input[5:0] opcode,
+        
+        input clk,
+        output reg freeze,
+        output reg[1:0] swp_sel,
 
         output reg[3:0] exec_cmd,
         output reg mem_r_en,
@@ -9,7 +13,11 @@ module Control_unit(
         output reg[1:0] branch_type,
         output reg single_src
 );
+    reg swp_cnt = 0;
+
     always @(*) begin
+        swp_sel <= 0;
+        freeze <= 0;
         exec_cmd            <= 4'b0;
         is_imm              <= 0;
         mem_r_en            <= 0;
@@ -19,6 +27,22 @@ module Control_unit(
         single_src          <= 0;
         
         case(opcode)
+            6'b111111: begin
+                freeze <= 1;
+                always @(posedge clk) begin
+                    if(swp_cnt == 0) begin
+                        exec_cmd <= 4'b1100; //FIRST
+                        swp_cnt <= 1;
+                        swp_sel <= 2'b01;
+                    end
+                    else begin
+                        exec_cmd <= 4'b1101; //SECOND
+                        swp_cnt <= 0;
+                        swp_sel <= 2'b10;
+                    end
+                end
+            end
+
             6'b000000: begin // NOP
                 exec_cmd    <= 4'b0000;
             end

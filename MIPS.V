@@ -314,11 +314,13 @@ inout	[35:0]	GPIO_1;					//	GPIO Connection 1
 	
 	wire flush;
 	wire hazard_detected;
+	wire swp_freeze;
+	wire if_freeze = hazard_detected | swp_freeze;
 
 	IF_Stage if_stage(
 			.clk(clk),
 			.rst(rst),
-			.freeze(hazard_detected),
+			.freeze(if_freeze),
 			
 			.Br_taken(exe_br_taken),
 			.Br_Addr(exe_br_addr),
@@ -330,7 +332,7 @@ inout	[35:0]	GPIO_1;					//	GPIO Connection 1
 	IF_Stage_reg if_stage_reg(
 			.clk(clk),
 			.rst(rst),
-			.freeze(hazard_detected),
+			.freeze(if_freeze),
 			.flush(flush),
 
 			.PC_in(if_pc),
@@ -372,6 +374,7 @@ inout	[35:0]	GPIO_1;					//	GPIO Connection 1
 			.MEM_R_EN(id_mem_r_en),
 			.MEM_W_EN(id_mem_w_en),
 			.WB_EN(id_wb_en),
+			.freeze(swp_freeze);
 			.single_src(single_src)
 	);
 
