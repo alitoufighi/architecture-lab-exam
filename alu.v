@@ -5,7 +5,9 @@ module ALU(
     
     output [31:0] result
 );
-    assign result = (cmd==4'b0000) ? in1 + in2 :
+    assign result = (cmd==4'b1100) ? in2 :
+                    (cmd==4'b1101) ? in1 :
+                    (cmd==4'b0000) ? in1 + in2 :
                     (cmd==4'b0010) ? in1 - in2 :
                     (cmd==4'b0100) ? in1 & in2 :
                     (cmd==4'b0101) ? in1 | in2 :
@@ -14,7 +16,6 @@ module ALU(
                     (cmd==4'b1000) ? in1 << in2 :
                     (cmd==4'b1001) ? $signed($signed(in1) >>> in2) :
                     (cmd==4'b1010) ? in1 >> in2 :
-                    (cmd==4'b1100) ? in2 :
-                    (cmd==4'b1101) ? in1 :
+
                     32'b0;
 endmodule
