@@ -6,20 +6,23 @@ module Hazard_Detection_Unit(
     input EXE_WB_EN,
     input [4:0] MEM_Dest,
     input MEM_WB_EN,
+    input is_swp,
     
     output reg hazard_detected
 );
     always @(*) begin
         hazard_detected = 0;
-        if(MEM_WB_EN) begin
-            hazard_detected = (MEM_Dest == src1);
-            if(~single_src)
-                hazard_detected = (hazard_detected | (MEM_Dest == src2));
-        end
-        if(EXE_WB_EN) begin
-            hazard_detected = (EXE_Dest == src1);
-            if(~single_src)
-                hazard_detected = (hazard_detected | (EXE_Dest == src2));
+        if (~is_swp) begin
+            if(MEM_WB_EN) begin
+                hazard_detected = (MEM_Dest == src1);
+                if(~single_src)
+                    hazard_detected = (hazard_detected | (MEM_Dest == src2));
+            end
+            if(EXE_WB_EN) begin
+                hazard_detected = (EXE_Dest == src1);
+                if(~single_src)
+                    hazard_detected = (hazard_detected | (EXE_Dest == src2));
+            end
         end
     end
 

@@ -354,7 +354,7 @@ inout	[35:0]	GPIO_1;					//	GPIO Connection 1
 	wire [4:0] wb_wb_dest;
 	wire wb_wb_en;
 	wire single_src;
-
+	wire is_swp;
 	ID_Stage id_stage(
 			.clk(clk),
 			.rst(rst),
@@ -375,7 +375,8 @@ inout	[35:0]	GPIO_1;					//	GPIO Connection 1
 			.MEM_W_EN(id_mem_w_en),
 			.WB_EN(id_wb_en),
 			.freeze(swp_freeze),
-			.single_src(single_src)
+			.single_src(single_src),
+			.is_swp(is_swp)
 	);
 
 	wire exe_wb_en_out;
@@ -390,6 +391,7 @@ inout	[35:0]	GPIO_1;					//	GPIO Connection 1
         .EXE_WB_EN(id_wb_en_out),
         .MEM_Dest(exe_dest_out),
         .MEM_WB_EN(exe_wb_en_out),
+		.is_swp(is_swp),
 
         .hazard_detected(hazard_detected)
     );

@@ -11,7 +11,8 @@ module Control_unit(
         output reg wb_en,
         output reg is_imm,
         output reg[1:0] branch_type,
-        output reg single_src
+        output reg single_src,
+        output reg is_swp
 );
     reg swp_cnt = 0;
 
@@ -31,6 +32,7 @@ module Control_unit(
         
         case(opcode)
             6'b111111: begin
+                is_swp <= 1;
                 wb_en <= 1;
                 if(swp_cnt == 0) begin
                     exec_cmd <= 4'b1100; //FIRST
