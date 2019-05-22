@@ -45,11 +45,11 @@ module ID_Stage(
             .is_imm(_is_imm),
             .branch_type(_Br_type),
             .single_src(_single_src),
-            .is_swp(is_swp)
+            .is_swp(_is_swp)
     );
 
     assign {EXE_CMD, MEM_R_EN, MEM_W_EN, WB_EN, is_imm, Br_type, single_src, freeze, swp_sel, is_swp} = (hazard_detected) ? 14'b0 : 
-                                                                        {_EXE_CMD, _MEM_R_EN, _MEM_W_EN, _WB_EN, _is_imm, _Br_type, _single_src, _freeze, _swp_sel< _is_swp};
+                                                                        {_EXE_CMD, _MEM_R_EN, _MEM_W_EN, _WB_EN, _is_imm, _Br_type, _single_src, _freeze, _swp_sel, _is_swp};
 
     Registers_file reg_file(
             .clk(clk),

@@ -29,6 +29,7 @@ module Control_unit(
         single_src          <= 0;
 		swp_sel <= 2'b0;
         freeze <= 0;
+        is_swp <= 0;
         
         case(opcode)
             6'b111111: begin
