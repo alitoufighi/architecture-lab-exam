@@ -8,10 +8,10 @@ module Instruction_mem(
     assign shifted_address     = {2'b0, addr[31:2]};
 
     assign instruction_mem[0 ] = 32'b000000_00000_00000_00000_00000000000;//-- NOP
-    assign instruction_mem[1 ] = 32'b100000_00000_00001_0000100000101001; //-- Addi r1 ,r0 ,1546 //r1=1546
-    assign instruction_mem[2 ] = 32'b100000_00000_00010_0000000100001001; //-- Add r2 ,r0 ,r1//r2=1546
+    assign instruction_mem[1 ] = 32'b100000_00000_00001_0000100000101001; //-- //r1=2089
+    assign instruction_mem[2 ] = 32'b100000_00000_00010_0000000100001001; //-- //r2=265
     assign instruction_mem[3 ] = 32'b111111_00001_00010_0000000000000000; //-- sub r3 ,r0 ,r1//r3=-1546
-    assign instruction_mem[4 ] = 32'b000000_00001_00001_00011_00000000000;//-- and r4,r2,r3 //r4=2
+    assign instruction_mem[4 ] = 32'b000001_00001_00001_00011_00000000000;//-- and r4,r2,r3 //r4=2
 
     // assign instruction_mem[0 ] = 32'b000000_00000_00000_00000_00000000000;//-- NOP
     // assign instruction_mem[1 ] = 32'b100000_00000_00001_00000_11000001010;//-- Addi r1 ,r0 ,1546 //r1=1546

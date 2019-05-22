@@ -17,6 +17,7 @@ module Control_unit(
 
     always @(posedge clk) begin
         freeze <= 0;
+        swp_sel <= 0;
         case(opcode)
             6'b111111: begin
                 freeze <= 1;
@@ -35,7 +36,7 @@ module Control_unit(
     end
 
     always @(*) begin
-        swp_sel <= 0;
+        
         
         // exec_cmd            <= 4'b0;
         is_imm              <= 0;
