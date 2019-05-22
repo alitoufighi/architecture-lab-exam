@@ -20,7 +20,7 @@ module Control_unit(
         freeze <= 0;
         case(opcode)
             6'b111111: begin
-                wb_en       <= 1;
+                wb_en <= 1;
                 if(swp_cnt == 0) begin
                     exec_cmd <= 4'b1100; //FIRST
                     swp_cnt <= 1;
