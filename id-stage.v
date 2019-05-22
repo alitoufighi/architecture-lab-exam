@@ -28,14 +28,15 @@ module ID_Stage(
     wire _MEM_R_EN, _MEM_W_EN, _WB_EN, _is_imm, _single_src;
     wire [1:0] _Br_type;
 
-    wire [1:0] swp_sel;
+    wire [1:0] swp_sel, _swp_sel;
     wire [4:0] _Dest;
+    wire _freeze;
 
     Control_unit cu(
             .opcode(Instruction[31:26]),
             .clk(clk),
-            .freeze(swp_freeze),
-            .swp_sel(swp_sel),
+            .freeze(_freeze),
+            .swp_sel(_swp_sel),
             .exec_cmd(_EXE_CMD),
             .mem_r_en(_MEM_R_EN),
             .mem_w_en(_MEM_W_EN),
@@ -45,8 +46,8 @@ module ID_Stage(
             .single_src(_single_src)
     );
 
-    assign {EXE_CMD, MEM_R_EN, MEM_W_EN, WB_EN, is_imm, Br_type, single_src} = (hazard_detected) ? 11'b0 : 
-                                                                        {_EXE_CMD, _MEM_R_EN, _MEM_W_EN, _WB_EN, _is_imm, _Br_type, _single_src};
+    assign {EXE_CMD, MEM_R_EN, MEM_W_EN, WB_EN, is_imm, Br_type, single_src, freeze, swp_sel} = (hazard_detected) ? 13'b0 : 
+                                                                        {_EXE_CMD, _MEM_R_EN, _MEM_W_EN, _WB_EN, _is_imm, _Br_type, _single_src, _freeze, _swp_sel};
 
     Registers_file reg_file(
             .clk(clk),
