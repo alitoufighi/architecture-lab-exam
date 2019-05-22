@@ -16,6 +16,8 @@ module Control_unit(
     reg swp_cnt = 0;
 
     always @(posedge clk) begin
+        swp_sel <= 2'b0;
+        freeze <= 0;
         case(opcode)
             6'b111111: begin
                 wb_en       <= 1;
@@ -29,7 +31,6 @@ module Control_unit(
                     exec_cmd <= 4'b1101; //SECOND
                     swp_cnt <= 0;
                     swp_sel <= 2'b10;
-                    freeze <= 0;
                 end 
             end
         endcase
