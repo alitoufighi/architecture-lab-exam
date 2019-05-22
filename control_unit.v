@@ -26,7 +26,7 @@ module Control_unit(
         wb_en               <= 0;
         branch_type         <= 2'b0;
         single_src          <= 0;
-		  swp_sel <= 2'b0;
+		swp_sel <= 2'b0;
         freeze <= 0;
         
         case(opcode)
@@ -42,7 +42,6 @@ module Control_unit(
                     exec_cmd <= 4'b1101; //SECOND
                     swp_cnt <= 0;
                     swp_sel <= 2'b10;
-                    freeze <= 1;
                 end 
             end
 
