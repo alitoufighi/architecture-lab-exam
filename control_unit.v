@@ -15,9 +15,20 @@ module Control_unit(
 );
     reg swp_cnt = 0;
 
-    always @(posedge clk) begin
-        swp_sel <= 2'b0;
+
+    always @(posedge clk, opcode) begin
+        
+        
+        // exec_cmd            <= 4'b0;
+        is_imm              <= 0;
+        mem_r_en            <= 0;
+        mem_w_en            <= 0;
+        wb_en               <= 0;
+        branch_type         <= 2'b0;
+        single_src          <= 0;
+		  swp_sel <= 2'b0;
         freeze <= 0;
+        
         case(opcode)
             6'b111111: begin
                 wb_en <= 1;
@@ -33,36 +44,6 @@ module Control_unit(
                     swp_sel <= 2'b10;
                 end 
             end
-        endcase
-    end
-
-    always @(*) begin
-        
-        
-        // exec_cmd            <= 4'b0;
-        is_imm              <= 0;
-        mem_r_en            <= 0;
-        mem_w_en            <= 0;
-        wb_en               <= 0;
-        branch_type         <= 2'b0;
-        single_src          <= 0;
-        
-        case(opcode)
-            // 6'b111111: begin
-            //     freeze <= 1;
-            //     always @(posedge clk) begin
-            //         if(swp_cnt == 0) begin
-            //             exec_cmd <= 4'b1100; //FIRST
-            //             swp_cnt <= 1;
-            //             swp_sel <= 2'b01;
-            //         end
-            //         else begin
-            //             exec_cmd <= 4'b1101; //SECOND
-            //             swp_cnt <= 0;
-            //             swp_sel <= 2'b10;
-            //         end
-            //     end
-            // end
 
             6'b000000: begin // NOP
                 exec_cmd    <= 4'b0000;
