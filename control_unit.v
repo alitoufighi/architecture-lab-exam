@@ -25,11 +25,13 @@ module Control_unit(
                     exec_cmd <= 4'b1100; //FIRST
                     swp_cnt <= 1;
                     swp_sel <= 2'b01;
+                    wb_en       <= 1;
                 end
                 else begin
                     exec_cmd <= 4'b1101; //SECOND
                     swp_cnt <= 0;
                     swp_sel <= 2'b10;
+                    wb_en       <= 1;
                 end 
             end
         endcase
