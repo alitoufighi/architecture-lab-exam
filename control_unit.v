@@ -18,21 +18,20 @@ module Control_unit(
     always @(posedge clk) begin
         freeze <= 0;
         swp_sel <= 0;
+        wb_en       <= 0;
         case(opcode)
             6'b111111: begin
-
+                wb_en       <= 1;
                 if(swp_cnt == 0) begin
                     exec_cmd <= 4'b1100; //FIRST
                     swp_cnt <= 1;
                     swp_sel <= 2'b01;
-                    wb_en       <= 1;
                     freeze <= 1;
                 end
                 else begin
                     exec_cmd <= 4'b1101; //SECOND
                     swp_cnt <= 0;
                     swp_sel <= 2'b10;
-                    wb_en       <= 1;
                     freeze <= 0;
                 end 
             end
