@@ -42,6 +42,7 @@ module Control_unit(
                     exec_cmd <= 4'b1101; //SECOND
                     swp_cnt <= 0;
                     swp_sel <= 2'b10;
+                    freeze <= 1;
                 end 
             end
 
