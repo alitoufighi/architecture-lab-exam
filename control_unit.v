@@ -16,9 +16,6 @@ module Control_unit(
     reg swp_cnt = 0;
 
     always @(posedge clk) begin
-        freeze <= 0;
-        swp_sel <= 0;
-        wb_en       <= 0;
         case(opcode)
             6'b111111: begin
                 wb_en       <= 1;
