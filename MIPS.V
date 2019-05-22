@@ -478,7 +478,7 @@ inout	[35:0]	GPIO_1;					//	GPIO Connection 1
 			.Mem_read_value(mem_Mem_read_value)
 	);
 	
-	wire[31:0] mem_alu_result_out, mem_pc_out, mem_Mem_read_value_out;
+	wire[31:0] mem_alu_result_out, mem_pc_out, mem_Mem_read_value_out, mem_wb_en_out;
 	wire mem_mem_r_en_out;
 	wire[4:0] mem_dest_out;
 
