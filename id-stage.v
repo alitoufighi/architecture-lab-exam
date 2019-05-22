@@ -69,5 +69,5 @@ module ID_Stage(
     assign Val1 = RegF1;
     assign Reg2 = RegF2;
     assign _Dest = is_imm ? Instruction[20:16] : Instruction[15:11];
-    assign Dest = (swp_sel==0) ? _Dest : (swp_sel == 1) ? src1 : src2;
+    assign Dest = (swp_sel==0) ? _Dest : (swp_sel == 1) ? RegF1 : RegF2;
 endmodule

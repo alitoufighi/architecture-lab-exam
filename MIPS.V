@@ -374,7 +374,7 @@ inout	[35:0]	GPIO_1;					//	GPIO Connection 1
 			.MEM_R_EN(id_mem_r_en),
 			.MEM_W_EN(id_mem_w_en),
 			.WB_EN(id_wb_en),
-			.freeze(swp_freeze);
+			.freeze(swp_freeze),
 			.single_src(single_src)
 	);
 
